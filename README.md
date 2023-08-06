@@ -1,6 +1,6 @@
 # test_connection_to_multiple_db
 
-This is a test project to see how to connect 2 postgres databases with foreign key from one table in database1 to second table in database2.
+This is a django test project to see how to connect 2 postgres databases with foreign key from one table in database1 to second table in database2.
 
 - Project uses django-rest-framework to serve big dataset
 - Displaying data in datatable 
@@ -43,7 +43,7 @@ CREATE TABLE public.clients (
 I have used raw query with a dblink in postgres defined via the sql command :
 <code>	SELECT dblink_connect('your_connection_name', 'host=localhost dbname=exercices user=postgres password=xxxx');</code>
 
-Then in my filter i have to user the correct cursor and execute the raw query using the dblink:
+Then in my filter i have to user the correct cursor and execute the raw query using the dblink:<br>
 <code>Vente.objects.raw("""SELECT tb1.id , tb1.date_vente, tb1.prix_de_vente, tb2.nom
                FROM vente_vente tb1
                LEFT JOIN (
