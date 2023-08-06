@@ -53,3 +53,7 @@ Then in my filter i have to user the correct cursor and execute the raw query us
                  AS tb2(vendeur_id int, nom text)
                ) AS tb2 ON tb2.vendeur_id = tb1.vendeur_id ORDER BY tb2.nom
 </code>
+<br>
+<br>
+
+I have also used a little bit of htmx and a sweetalert to display a popup on submit new object
