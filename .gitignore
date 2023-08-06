@@ -1,0 +1,15 @@
+/.idea/inspectionProfiles/profiles_settings.xml
+/.idea/inspectionProfiles/Project_Default.xml
+/.idea/.gitignore
+/.idea/dbnavigator.xml
+/.idea/jsLibraryMappings.xml
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/test_connection_to_multiple_db.iml
+/.idea/vcs.xml
+/existing_db/migrations/0001_initial.py
+/existing_db/migrations/__init__.py
+/vente/migrations/0001_initial.py
+/vente/migrations/__init__.py
+/.idea/
+/config.ini

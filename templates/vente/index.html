@@ -1,0 +1,87 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <link rel="stylesheet" href="{% static 'lib/css/bootstrap.min.css' %}">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css"/>
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://unpkg.com/htmx.org/dist/htmx.js"></script>
+  <title>Document</title>
+</head>
+<body>
+<form id="vente-form" hx-post="{% url 'add-vente' %}" hx-swap="outerHTML">
+  {% csrf_token %}
+  <label for="date_vente">Date Vente:</label>
+  <input type="datetime-local" id="date-vente" name="date_vente">
+  <label for="vendeur">Vendeur</label>
+  <select id="vendeur" name="vendeur">
+    {
+    {% for v in vendeurs %}
+      <option value="{{ v.vendeur_id }}">{{ v.nom }} {{ v.prenom }}</option>
+    {% endfor %}
+    }
+  </select>
+<label for="client">Client</label>
+<select id="client" name="client">
+    {
+    {% for c in clients %}
+      <option value="{{ c.client_id }}">{{ c.nom }} {{ c.prenom }}</option>
+    {% endfor %}
+    }
+  </select>
+<label for="prix_de_vente">Prix de vente</label>
+<input type="number" name="prix_de_vente">
+  <button hx-trigger="htmx:afterRequest" hx-post="{% url 'add-vente' %}" hx-swap="outerHTML">
+    Create Vente
+  </button>
+</form>
+<table class="display" id="datatable">
+  <thead>
+  <tr>
+    <th data-data="date_vente"></th>
+    <th data-data="vendeur_nom"></th>
+    <th data-data="client_nom"></th>
+    <th data-data="prix_de_vente"></th>
+  </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+{% load sweetify %}
+{% sweetify %}
+</body>
+<script>
+    $(document).ready(function () {
+        $('#datatable').DataTable({
+            serverSide: true,
+            ajax: '/api/ventes/?format=datatables',
+            columns: [
+                {"data": "date_vente"},
+                {"data": "vendeur.nom", name:"vendeur.nom"},
+                {"data": "client.nom", name:"client.nom"},
+                {"data": "prix_de_vente", name: "prix_de_vente"},
+            ]
+        });
+
+    });
+    document.addEventListener("htmx:afterRequest", function (event) {
+        // Function to be executed when the event is triggered
+        console.log("Event 'my-event' triggered!");
+        // Add your custom logic here
+        showPopup()
+    });
+
+    function showPopup() {
+        console.log("coucou")
+    }
+
+</script>
+</html>

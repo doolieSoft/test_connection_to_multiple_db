@@ -1,0 +1,1 @@
+id : 2 date_vente : 2023-08-05 vendeur : XHENCEVAL client : YGREC prix_de_vent : 1000.00
